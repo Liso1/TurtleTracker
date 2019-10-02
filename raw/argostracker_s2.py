@@ -66,5 +66,3 @@ else:
         theLat = theLocation[0]
         theLon = theLocation[1]
         print("Record {0}: Sara was see at {1}N-{2}W, on {3}".format(k,theLat,theLon,theDate))
-
-    
