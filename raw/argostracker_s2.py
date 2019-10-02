@@ -23,7 +23,7 @@ fileObj.close()
 
 # Create empty dictionaries
 dataDict = {}
-LocationDict = {}
+locationDict = {}
 
 # Use a for loop to read each line, one at a time, until the list is exhausted
 for lineString in lineStrings:
@@ -38,9 +38,21 @@ for lineString in lineStrings:
     obsLC = lineData[3]                 # Observation Location Class
     obsLat = lineData[5]                # Observation Latitude
     obsLon = lineData[6]                # Observation Longitude
-    
-    # Add values to dictionary
-    dataDict[recordID] = obsDate
-    
+
+    #filter out record
+    if obsLC in ("1","2","3"):
+            
+        # Add values to dictionary
+        dataDict[recordID] = obsDate
+        locationDict[recordID] = (obsLat, obsLon)
+        
 # Indicate script is complete
 print ("Finished")
+
+# Ask the user for a date, specifying the format
+userDate = input("Enter a date (M/D/YYYY):")
+
+#collect keys matching user date
+keylist = []
+for k,v in dataDict.items():
+    print(k, v)
