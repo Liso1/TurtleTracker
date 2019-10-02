@@ -22,7 +22,7 @@ print ("There are {} records in the file".format(len(lineStrings)))
 fileObj.close()
 
 # Create empty dictionaries
-dataDict = {}
+dateDict = {}
 locationDict = {}
 
 # Use a for loop to read each line, one at a time, until the list is exhausted
@@ -43,16 +43,28 @@ for lineString in lineStrings:
     if obsLC in ("1","2","3"):
             
         # Add values to dictionary
-        dataDict[recordID] = obsDate
+        dateDict[recordID] = obsDate
         locationDict[recordID] = (obsLat, obsLon)
-        
-# Indicate script is complete
-print ("Finished")
 
 # Ask the user for a date, specifying the format
 userDate = input("Enter a date (M/D/YYYY):")
 
 #collect keys matching user date
-keylist = []
-for k,v in dataDict.items():
-    print(k, v)
+keyList = []
+for k,v in dateDict.items():
+    if v == userDate:
+        keyList.append(k)
+        
+# report if no keys are found
+if len(keyList) == 0:
+    print ("No observations recorded for {}".format(userDate))
+# Loop through each key and report the associated date location
+else:
+     for k in keyList:
+        theDate = dateDict[k]
+        theLocation = locationDict[k]
+        theLat = theLocation[0]
+        theLon = theLocation[1]
+        print("Record {0}: Sara was see at {1}N-{2}W, on {3}".format(k,theLat,theLon,theDate))
+
+    
